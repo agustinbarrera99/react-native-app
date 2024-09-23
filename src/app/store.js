@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import jwtReducer from "../features/token/tokenSlice";
+import { shopApi } from "./services/shop";
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
-        jwt: jwtReducer
+        [shopApi.reducerPath]: shopApi.reducer,
     },
-})
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(shopApi.middleware),
+});
+
+export default store; 
