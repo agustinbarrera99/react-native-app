@@ -1,32 +1,50 @@
-import MyProducts from '../components/MyProductsContainer';
-import UserData from '../components/UserData';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View,Image,FlatList } from 'react-native'
+import { useEffect } from 'react'
+import SubmitButton from '../components/SubmitButton'
+import { useGetUserQuery } from '../services/users'
+import { useSelector } from 'react-redux'
+import LoadingSpinner from '../components/LoadingSpinner'
 
-const MyProfile = () => {
+const MyProfile = ({navigation}) => {
+  const localId = useSelector(state => state.auth.localId)
+  const {data:user,isSuccess,isLoading,isError,error} = useGetUserQuery({localId})
+  useEffect(()=>{
+    if(isSuccess) console.log(user)
+    if(isError) console.log(error)
+  },[isSuccess,isError])
+
+  if(isLoading) return <LoadingSpinner/>
   return (
     <View style={styles.container}>
-      <UserData />
-      <Text style={styles.sectionTitle}>Mis productos</Text>
-      <MyProducts />
+      <Image
+        source={user.image ? 
+                {uri:user.image}
+                :
+                require("../../assets/profile_default.png")}
+        resizeMode='cover'
+        style={styles.image}
+      />
+      <SubmitButton title="Agregar imagen de perfil" onPress={()=>navigation.navigate("ImageSelector")}/>
+      <SubmitButton title="Agregar localizacion" onPress={()=>navigation.navigate("LocationSelector")}/>
+        <FlatList
+          data={user.locations}
+          keyExtractor={item => item.id}
+          renderItem={({item})=> <View><Text>{item.address}</Text></View>}
+        />
     </View>
-  );
-};
+  )
+}
 
-export default MyProfile;
+export default MyProfile
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f9f9f9',
-    paddingHorizontal: 20,
-    paddingTop: 40,
-  },
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginTop: 30,
-    marginBottom: 20,
-    color: '#333',
-    textAlign: 'left',
-  },
-});
+    container:{
+        marginTop:70,
+        alignItems:"center",
+        gap:20
+    },
+    image:{
+        width:150,
+        height:150
+    }
+})

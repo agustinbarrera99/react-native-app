@@ -1,14 +1,25 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../screens/Login";
-import Register from "../screens/Register";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Login from '../screens/Login'
+import Register from '../screens/Register'
+import { Header } from 'react-native/Libraries/NewAppScreen'
 
 const Stack = createNativeStackNavigator()
 
-export const AuthStack = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="Iniciar sesion" component={Login} />
-            <Stack.Screen name="Registrarse" component={Register}/>
-        </Stack.Navigator>
-    )
+const AuthStack = () => {
+  return (
+   <Stack.Navigator
+    screenOptions={(
+        ({route}) => {
+            return {
+                header: () => <Header title={route.name === "Login" ? "Inicio de Sesion":"Registrarme"}/>
+            }
+        }
+)}
+   >
+        <Stack.Screen name='Login' component={Login}/>
+        <Stack.Screen name='Register' component={Register}/>
+   </Stack.Navigator>
+  )
 }
+
+export default AuthStack

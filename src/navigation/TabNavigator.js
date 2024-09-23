@@ -1,62 +1,70 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ProductsStack from "./ProductsStack";
-import FavoritesStack from "./FavoritesStack";
-import ProfileStack from "./ProfileStack";
-import TabBarIcon from "../components/TabBarIcon";
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
+import ShopStack from './ShopStack'
+import CartStack from './CartStack'
+import OrdersStack from './OrdersStack'
+import { colors } from '../global/colors'
+import TabBarIcon from "../Components/TabBarIcon"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import ProfileStack from './ProfileStack'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
-export const TabNavigator = () => {
-    return (
-        <Tab.Navigator
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator 
         screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: styles.tabBar,
+            headerShown:false,
+            tabBarShowLabel:false,
+            tabBarStyle:styles.tabBar
         }}
-      >
-        <Tab.Screen
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <TabBarIcon text="Productos" focused={focused} icon="shopping-cart" />;
-            },
-          }}
-          name="Inicio"
-          component={ProductsStack}
+    >
+        <Tab.Screen 
+            name='HomeStack' 
+            component={ShopStack}
+            options={{
+                tabBarIcon:({focused}) => {
+                    return <TabBarIcon focused={focused} text="Shop" icon="shop"/>
+                }
+                
+            }}
+        />
+        <Tab.Screen 
+            name='CartStack' 
+            component={CartStack}
+            options={{
+                tabBarIcon:({focused}) => {
+                    return <TabBarIcon focused={focused} text="Carrito" icon="shopping-cart"/>
+                }
+                
+            }}
         />
         <Tab.Screen
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <TabBarIcon focused={focused} text="Favoritos" icon="heart" />;
-            },
-          }}
-          name="Favoritos"
-          component={FavoritesStack}
+            name='OrdersStack' 
+            component={OrdersStack}
+            options={{
+                tabBarIcon:({focused}) => {
+                    return <TabBarIcon focused={focused} text="Ordenes" icon="list"/>
+                }
+            }}
         />
-        <Tab.Screen
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return <TabBarIcon focused={focused} text="Mi perfil" icon="man" />;
-            },
-          }}
-          name="Mi perfil"
-          component={ProfileStack}
+          <Tab.Screen
+            name='ProfileStack' 
+            component={ProfileStack}
+            options={{
+                tabBarIcon:({focused}) => {
+                    return <TabBarIcon focused={focused} text="Perfil" icon="user"/>
+                }
+            }}
         />
-      </Tab.Navigator>
-    )
+    </Tab.Navigator>
+  )
 }
 
+export default TabNavigator
+
 const styles = StyleSheet.create({
-    tabBar: {
-      backgroundColor: "#f0db4c",
-      shadowColor: "black",
-      elevation: 4,
-      bottom: 15,
-      position: "absolute",
-      left: 20,
-      right: 20,
-      borderRadius: 15,
-      height: 75,
-    },
-  });
+    tabBar:{
+        backgroundColor:colors.green3,
+        height:80
+       }
+})

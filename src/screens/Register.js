@@ -1,80 +1,124 @@
-import React, { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Input from "../components/Input";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { colors } from "../global/colors";
+import SubmitButton from '../components/SubmitButton'
+import { useRegisterMutation } from "../services/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/auth/authSlice";
+import { registerSchema } from "../validations/registerSchema";
+import { InputForm } from '../components/InputForm'
 
 const Register = ({ navigation }) => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+  const [triggerRegister, { data, isSuccess, isError, error }] =
+    useRegisterMutation();
+  const dispatch = useDispatch();
 
-  const handleRegister = () => {
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
+  useEffect(() => {
+    if (isError) {
+      setErrorEmail("email existente");
+    }
+  }, [isError]);
+
+  const onSubmit = async () => {
+    try {
+      registerSchema.validateSync({ email, password, confirmPassword });
+      const { data } = await triggerRegister({ email, password });
+      dispatch(
+        setUser({
+          email: data.email,
+          idToken: data.idToken,
+          localId: data.localId,
+        })
+      );
+    } catch (error) {
+      switch (error.path) {
+        case "email":
+          setErrorEmail(error.message);
+          setErrorPassword("");
+          setErrorConfirmPassword("");
+          break;
+        case "password":
+          setErrorEmail("");
+          setErrorPassword(error.message);
+          setErrorConfirmPassword("");
+          break;
+        case "confirmPassword":
+          setErrorEmail("");
+          setErrorPassword("");
+          setErrorConfirmPassword(error.message);
+          break;
+      }
+    }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Registrarse</Text>
-      <Input
-        placeholder="Nombre de Usuario"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <Input placeholder="Email" value={email} onChangeText={setEmail} />
-      <Input
-        placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Registrarse</Text>
-      </TouchableOpacity>
-      <Pressable onPress={() => navigation.navigate("Iniciar sesión")}>
-        <Text style={styles.link}>¿Ya tienes una cuenta? Inicia sesión</Text>
-      </Pressable>
+    <View style={styles.main}>
+      <View style={styles.container}>
+        <InputForm
+          label="Email"
+          value={email}
+          onChangeText={(t) => setEmail(t)}
+          isSecure={false}
+          error={errorEmail}
+        />
+        <InputForm
+          label="Password"
+          value={password}
+          onChangeText={(t) => setPassword(t)}
+          isSecure={true}
+          error={errorPassword}
+        />
+        <InputForm
+          label="Confirmar Password"
+          value={confirmPassword}
+          onChangeText={(t) => setConfirmPassword(t)}
+          isSecure={true}
+          error={errorConfirmPassword}
+        />
+        <SubmitButton onPress={onSubmit} title="Registrarme" />
+        <Text style={styles.sub}>ya tenes una cuenta?</Text>
+        <Pressable onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.subLink}>Incio de sesion</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
 
+export default Register;
+
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
     justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#f5f5f5",
+    alignItems: "center",
+  },
+  container: {
+    width: "90%",
+    backgroundColor: colors.green2,
+    gap: 15,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 20,
   },
   title: {
-    fontSize: 28,
-    marginBottom: 20,
-    textAlign: "center",
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontFamily: "Lobster",
   },
-  button: {
-    backgroundColor: "#007BFF",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 10,
+  sub: {
+    fontSize: 14,
+    fontFamily: "Josefin",
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  link: {
-    textAlign: "center",
-    marginTop: 15,
-    color: "#007BFF",
-    textDecorationLine: 'underline',
+  subLink: {
+    fontSize: 14,
+    fontFamily: "Josefin",
+    color: "blue",
   },
 });
-
-export default Register;

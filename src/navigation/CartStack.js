@@ -1,25 +1,23 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Header } from '../components/Header'
-import MyProfile from '../screens/MyProfile'
-import ImageSelector from '../screens/ImageSelector'
+import Cart from '../screens/Cart'
 
 const Stack = createNativeStackNavigator()
 
-const ProfileStack = () => {
+const CartStack = () => {
   return (
     <Stack.Navigator
             screenOptions={(
                 () => {
                     return {
-                        header: () => <Header title="mi perfil"/>
+                        header: () => <Header title="carrito"/>
                     }
                 }
             )}
         >
-            <Stack.Screen name='MyProfile' component={MyProfile}/>
-            <Stack.Screen name='ImageSelector' component={ImageSelector}/>
+            <Stack.Screen name='Cart' component={Cart}/>
         </Stack.Navigator>
   )
 }
 
-export default ProfileStack
+export default CartStack
