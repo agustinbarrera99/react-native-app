@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo';
 
-const TabBarIcon = ({text,icon,focused}) => {
+export const TabBarIcon = ({text,icon,focused}) => {
   return (
     <View style={styles.container}> 
        <Entypo 
@@ -14,7 +14,6 @@ const TabBarIcon = ({text,icon,focused}) => {
   )
 }
 
-export default TabBarIcon
 
 const styles = StyleSheet.create({
     container:{

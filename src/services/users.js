@@ -4,7 +4,7 @@ import { URL_FIREBASE } from '../firebase/database'
 export const usersApi = createApi({
     reducerPath:"usersApi",
     baseQuery:fetchBaseQuery({baseUrl:URL_FIREBASE}),
-    tagTypes:["userImage","userLocation"],
+    tagTypes:["userImage"],
     endpoints:(builder) => ({
         patchImageProfile:builder.mutation({
             query:({image,localId})=> ({
@@ -14,29 +14,17 @@ export const usersApi = createApi({
             }),
             invalidatesTags:["userImage"]
         }),
-        postUserLocation:builder.mutation({
-            query:({localId,userLocation})=> ({
-                url:`users/${localId}/locations.json`,
-                method:"POST",
-                body:userLocation
-            }),
-            invalidatesTags:["userLocation"]
-        }),
         getUser:builder.query({
             query:({localId})=> `users/${localId}.json`,
             transformResponse:(response) => {
-
-                if(!response) return {image:"",locations:[]}
-                if(!response.locations) response.locations = []
+                if(!response) return {image:""}
                 if(!response.image)  response.image = ""
              
-                const data = Object.entries(response.locations).map(item => ({id:item[0],...item[1]}))
                 return {
                     ...response,
-                    locations:data
                 }
             },
-            providesTags:["userImage","userLocation"]
+            providesTags:["userImage"]
         })
 
     })
@@ -44,6 +32,5 @@ export const usersApi = createApi({
 
 export const {  
                 usePatchImageProfileMutation,
-                usePostUserLocationMutation,
                 useGetUserQuery,
 } = usersApi

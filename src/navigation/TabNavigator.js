@@ -3,7 +3,7 @@ import ShopStack from './ShopStack'
 import CartStack from './CartStack'
 import OrdersStack from './OrdersStack'
 import { colors } from '../global/colors'
-import TabBarIcon from "../Components/TabBarIcon"
+import { TabBarIcon } from '../components/TabBarIcon'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileStack from './ProfileStack'
 

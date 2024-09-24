@@ -1,6 +1,7 @@
 export const colors = {
-    lightGray:"#EDF1D6",
-    green1:"#f4ebd0",
-    green2:"#b68d40",
-    green3:"#d6ad60"
-}
+    lightGray: "#F5F5F5",  
+    green1: "#A8D5BA",      
+    green2: "#4CAF50",   
+    green3: "#FFB74D",    
+    accent: "#FF7043",     
+  };

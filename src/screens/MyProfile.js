@@ -25,12 +25,6 @@ const MyProfile = ({navigation}) => {
         style={styles.image}
       />
       <SubmitButton title="Agregar imagen de perfil" onPress={()=>navigation.navigate("ImageSelector")}/>
-      <SubmitButton title="Agregar localizacion" onPress={()=>navigation.navigate("LocationSelector")}/>
-        <FlatList
-          data={user.locations}
-          keyExtractor={item => item.id}
-          renderItem={({item})=> <View><Text>{item.address}</Text></View>}
-        />
     </View>
   )
 }

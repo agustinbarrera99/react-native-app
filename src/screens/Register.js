@@ -84,7 +84,7 @@ const Register = ({ navigation }) => {
         <SubmitButton onPress={onSubmit} title="Registrarme" />
         <Text style={styles.sub}>ya tenes una cuenta?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.subLink}>Incio de sesion</Text>
+          <Text style={styles.subLink}>Inicio de sesion</Text>
         </Pressable>
       </View>
     </View>
@@ -98,27 +98,35 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.lightGray, 
   },
   container: {
     width: "90%",
-    backgroundColor: colors.green2,
-    gap: 15,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 20,
+    backgroundColor: colors.green1,
+    gap: 20,
+    borderRadius: 12,
+    paddingVertical: 25,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,  
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontFamily: "Lobster",
+    color: colors.green2,
   },
   sub: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "Josefin",
+    color: "#333", 
   },
   subLink: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "Josefin",
-    color: "blue",
+    color: colors.accent,  
+    textDecorationLine: "underline", 
   },
 });

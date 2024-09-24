@@ -7,7 +7,8 @@ import { setUser } from '../features/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { loginSchema } from '../validations/loginSchema'
 import { InputForm } from '../components/InputForm'
-import SubmitButton from '../components/SubmitButton'
+import { insertSession } from '../db'
+
 
 const Login = ({navigation}) => {
 
@@ -30,6 +31,7 @@ const Login = ({navigation}) => {
         try {
           loginSchema.validateSync({email,password})
           const {data} = await triggerLogin({email,password})
+          insertSession(data)
           dispatch(setUser({
             email:data.email,
             idToken:data.idToken,
@@ -83,31 +85,39 @@ const Login = ({navigation}) => {
 export default Login
 
 const styles = StyleSheet.create({
-    main:{
-        flex:1,
-        justifyContent:"center",
-        alignItems:"center"
-      },
-      container:{
-        width:"90%",
-        backgroundColor:colors.green2,
-        gap:15,
-        borderRadius:10,
-        justifyContent:"center",
-        alignItems:"center",
-        paddingVertical:20
-      },
-      title:{
-        fontSize:22,
-        fontFamily:"Lobster"
-      },
-      sub:{
-        fontSize:14,
-        fontFamily:"Josefin"
-      },
-      subLink:{
-        fontSize:14,
-        fontFamily:"Josefin",
-        color:"blue"
-      }
-})
+  main: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.lightGray,
+  },
+  container: {
+    width: "90%",
+    backgroundColor: colors.green1,
+    gap: 20,
+    borderRadius: 12,
+    paddingVertical: 25,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: "Lobster",
+    color: colors.green2,
+  },
+  sub: {
+    fontSize: 16,
+    fontFamily: "Josefin",
+    color: "#333",  
+  },
+  subLink: {
+    fontSize: 16,
+    fontFamily: "Josefin",
+    color: colors.accent, 
+    textDecorationLine: "underline",
+  },
+});

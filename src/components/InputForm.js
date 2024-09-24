@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View,TextInput } from 'react-native'
+import { colors } from '../global/colors';
 
 export const InputForm = ({label,value,onChangeText,isSecure,error}) => {
   return (
@@ -16,31 +17,27 @@ export const InputForm = ({label,value,onChangeText,isSecure,error}) => {
 }
 
 const styles = StyleSheet.create({
-    inputContainer:{
-        width:"100%"
-    },
-    input:{
-        width:"90%",
-        borderWidth:0,
-        borderBottomWidth:3,
-        borderBottomColor:"white",
-        padding:2,
-        fontFamily:"Josefin",
-        fontSize:14,
-        marginHorizontal:"5%",
-        marginVertical:10
-      },
-      titleInput:{
-        width:"90%",
-        marginHorizontal:"5%",
-        fontSize:16,
-        fontFamily:"Josefin"
-      },
-      error:{
-        fontSize:16,
-        color:"red",
-        fontFamily:"Josefin",
-        fontStyle:"italic",
-        marginLeft:20
-      }
-})
+  inputContainer: {
+    width: "100%",
+    marginVertical: 10,
+  },
+  input: {
+    width: "100%",
+    borderBottomWidth: 2,
+    borderBottomColor: colors.green2,
+    paddingVertical: 8,
+    fontFamily: "Josefin",
+    fontSize: 16,
+  },
+  titleInput: {
+    fontSize: 18,
+    fontFamily: "Josefin",
+    color: colors.green2,
+  },
+  error: {
+    fontSize: 14,
+    color: "red",
+    fontFamily: "Josefin",
+    marginTop: 5,
+  },
+});
