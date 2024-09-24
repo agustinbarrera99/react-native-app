@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View,Image,FlatList } from 'react-native'
 import { useEffect } from 'react'
-import SubmitButton from '../components/SubmitButton'
+import SubmitButon from '../Components/SubmitButon'
 import { useGetUserQuery } from '../services/users'
 import { useSelector } from 'react-redux'
-import LoadingSpinner from '../components/LoadingSpinner'
+import Spinner from '../Components/Spinner'
 
 const MyProfile = ({navigation}) => {
   const localId = useSelector(state => state.auth.localId)
@@ -13,7 +13,7 @@ const MyProfile = ({navigation}) => {
     if(isError) console.log(error)
   },[isSuccess,isError])
 
-  if(isLoading) return <LoadingSpinner/>
+  if(isLoading) return <Spinner />
   return (
     <View style={styles.container}>
       <Image
@@ -24,7 +24,7 @@ const MyProfile = ({navigation}) => {
         resizeMode='cover'
         style={styles.image}
       />
-      <SubmitButton title="Agregar imagen de perfil" onPress={()=>navigation.navigate("ImageSelector")}/>
+      <SubmitButon title="Agregar imagen de perfil" onPress={()=>navigation.navigate("ImageSelector")}/>
     </View>
   )
 }

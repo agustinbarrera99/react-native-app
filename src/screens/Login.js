@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View,Pressable } from 'react-native'
 import { colors } from '../global/colors'
 import { useEffect, useState } from 'react'
-import SubmitButton from '../components/SubmitButton'
+import SubmitButon from '../Components/SubmitButon'
 import { useLoginMutation } from '../services/auth'
 import { setUser } from '../features/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { loginSchema } from '../validations/loginSchema'
-import { InputForm } from '../components/InputForm'
+import InputFormulario from '../Components/InputFormulario'
 import { insertSession } from '../db'
 
 
@@ -58,21 +58,21 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.main}>
         <View style={styles.container}>
-            <InputForm
+            <InputFormulario
                 label="Email"
                 value={email}
                 onChangeText={(t) => setEmail(t)}
                 isSecure={false}
                 error={errorEmail}
             />
-            <InputForm
+            <InputFormulario
                 label="Password"
                 value={password}
                 onChangeText={(t) => setPassword(t)}
                 isSecure={true}
                 error={errorPassword}
             />
-            <SubmitButton onPress={onSubmit} title="Iniciar Sesion"/>
+            <SubmitButon onPress={onSubmit} title="Iniciar Sesion"/>
             <Text style={styles.sub}>No tenes una cuenta?</Text>
             <Pressable onPress={()=> navigation.navigate("Register")} >
                 <Text style={styles.subLink}>Registro</Text>

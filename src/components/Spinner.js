@@ -1,7 +1,6 @@
-import { StyleSheet, ActivityIndicator, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { colors } from '../global/colors'
-
-const LoadingSpinner = () => {
+const Spinner = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size={80} color="white"/>
@@ -9,7 +8,7 @@ const LoadingSpinner = () => {
   )
 }
 
-export default LoadingSpinner
+export default Spinner
 
 const styles = StyleSheet.create({
     container:{

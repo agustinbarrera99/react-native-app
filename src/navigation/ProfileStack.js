@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Header } from '../components/Header'
+import Headerr from '../Components/Headerr'
 import MyProfile from '../screens/MyProfile'
 import ImageSelector from '../screens/ImageSelector'
 
@@ -11,7 +11,7 @@ const ProfileStack = () => {
             screenOptions={(
                 () => {
                     return {
-                        header: () => <Header title="mi perfil"/>
+                        header: () => <Headerr title="mi perfil"/>
                     }
                 }
             )}

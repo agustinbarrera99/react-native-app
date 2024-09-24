@@ -4,7 +4,7 @@ import { addItemCart } from '../features/cart/cartSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { useGetProductQuery } from '../services/shop'
-import LoadingSpinner from '../components/LoadingSpinner'
+import Spinner from '../Components/Spinner'
 
 const ItemDetail = ({route}) => {
 
@@ -18,7 +18,7 @@ const ItemDetail = ({route}) => {
     navigation.navigate("CartStack")
   }
 
-  if(isLoading) return <LoadingSpinner/>
+  if(isLoading) return <Spinner />
 
   return (
     <View style={styles.container}>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { colors } from "../global/colors";
-import SubmitButton from '../components/SubmitButton'
+import SubmitButon from "../Components/SubmitButon";
 import { useRegisterMutation } from "../services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { registerSchema } from "../validations/registerSchema";
-import { InputForm } from '../components/InputForm'
+import InputFormulario from "../Components/InputFormulario";
 
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -60,28 +60,28 @@ const Register = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <InputForm
+        <InputFormulario
           label="Email"
           value={email}
           onChangeText={(t) => setEmail(t)}
           isSecure={false}
           error={errorEmail}
         />
-        <InputForm
+        <InputFormulario
           label="Password"
           value={password}
           onChangeText={(t) => setPassword(t)}
           isSecure={true}
           error={errorPassword}
         />
-        <InputForm
+        <InputFormulario
           label="Confirmar Password"
           value={confirmPassword}
           onChangeText={(t) => setConfirmPassword(t)}
           isSecure={true}
           error={errorConfirmPassword}
         />
-        <SubmitButton onPress={onSubmit} title="Registrarme" />
+        <SubmitButon onPress={onSubmit} title="Registrarme" />
         <Text style={styles.sub}>ya tenes una cuenta?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
           <Text style={styles.subLink}>Inicio de sesion</Text>

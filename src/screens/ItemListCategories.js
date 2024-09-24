@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet, View,Text} from 'react-native'
 import  { useEffect, useState } from 'react'
-import Search from '../components/Search'
-import ProductItem from '../components/ProductItem'
+import Buscador from '../Components/Buscador'
+import ProductItems from '../Components/ProductItems'
 import { useGetProductsQuery } from '../services/shop'
-import LoadingSpinner from '../components/LoadingSpinner'
+import Spinner from '../Components/Spinner'
 
 
 const ItemListCategories = ({route}) => {
@@ -28,16 +28,16 @@ const ItemListCategories = ({route}) => {
    
   }
 
-  if(isLoading) return <LoadingSpinner/>
+  if(isLoading) return <Spinner />
   if(isError) return <View><Text>{error.message}</Text></View>
 
   return (
     <View style={styles.container}>
-        <Search onSearch={onSearch}/>
+        <Buscador onSearch={onSearch}/>
         <FlatList
           data={productsFiltered}
           keyExtractor={item=>item.id}
-          renderItem={({item})=> <ProductItem product={item}/>}
+          renderItem={({item})=> <ProductItems product={item}/>}
         />
     </View>
   )

@@ -1,9 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
-import Entypo from '@expo/vector-icons/Entypo'
-import { colors } from '../global/colors'
 
-
-const CartItem = ({item}) => {
+const CartItems = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containerText}>
@@ -16,7 +13,7 @@ const CartItem = ({item}) => {
   )
 }
 
-export default CartItem
+export default CartItems
 
 const styles = StyleSheet.create({
     container:{

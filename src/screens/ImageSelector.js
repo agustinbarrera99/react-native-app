@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View,Image } from 'react-native'
-import SubmitButton from '../components/SubmitButton'
+import SubmitButon from '../Components/SubmitButon'
 import * as ImagePicker from 'expo-image-picker'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { usePatchImageProfileMutation } from '../services/users'
 import { useSelector } from 'react-redux'
 
@@ -38,8 +38,8 @@ const ImageSelector = ({navigation}) => {
         resizeMode='cover'
         style={styles.image}
       />
-      <SubmitButton title="Tomar Imagen" onPress={pickImage}/>
-      <SubmitButton title="Confirmar" onPress={confirmImage}/>
+      <SubmitButon title="Tomar Imagen" onPress={pickImage}/>
+      <SubmitButon title="Confirmar" onPress={confirmImage}/>
     </View>
   )
 }

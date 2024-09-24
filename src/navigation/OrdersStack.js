@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Header } from '../components/Header'
+import Headerr from '../Components/Headerr'
 import Orders from '../screens/Orders'
 import OrderDetail from '../screens/OrderDetail'
 
@@ -13,7 +13,7 @@ const OrdersStack = () => {
             screenOptions={(
                 () => {
                     return {
-                        header: () => <Header title="ordenes"/>
+                        header: () => <Headerr title="ordenes"/>
                     }
                 }
             )}

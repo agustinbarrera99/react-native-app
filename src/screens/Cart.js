@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View,FlatList, Pressable } from 'react-native'
-
-import CartItem from '../components/CartItem'
+import CartItems from '../Components/CartItems'
 import { colors } from '../global/colors'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePostOrderMutation } from '../services/orders'
@@ -30,7 +29,7 @@ const Cart = ({navigation}) => {
       <FlatList
       data={cart.items}
       keyExtractor={item => item.id}
-      renderItem={({item})=> <CartItem item={item}/> }
+      renderItem={({item})=> <CartItems item={item}/> }
       />
       <View style={styles.containerConfirm}>
         <Pressable onPress={handleAddOrder}>

@@ -1,5 +1,5 @@
 import { StyleSheet,View} from 'react-native'
-import Categories from '../components/Categories'
+import Categorias from '../Components/Categorias'
 
 const Home = () => {
   return (

@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from '../screens/Home'
 import ItemListCategories from '../screens/ItemListCategories'
 import ItemDetail from '../screens/ItemDetail'
-import { Header } from 'react-native/Libraries/NewAppScreen'
+import Headerr from '../Components/Headerr'
 
 const Stack = createNativeStackNavigator()
 const ShopStack = () => {
@@ -11,7 +11,7 @@ const ShopStack = () => {
             screenOptions={(
                 ({route}) => {
                     return {
-                        header: () => <Header title={
+                        header: () => <Headerr title={
                             route.name === "Home" ?
                                 "Bienvenido" 
                             : 

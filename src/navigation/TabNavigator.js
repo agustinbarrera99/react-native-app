@@ -3,7 +3,7 @@ import ShopStack from './ShopStack'
 import CartStack from './CartStack'
 import OrdersStack from './OrdersStack'
 import { colors } from '../global/colors'
-import { TabBarIcon } from '../components/TabBarIcon'
+import TabBarrIcon from '../Components/TabBarrIcon'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileStack from './ProfileStack'
 
@@ -23,7 +23,7 @@ const TabNavigator = () => {
             component={ShopStack}
             options={{
                 tabBarIcon:({focused}) => {
-                    return <TabBarIcon focused={focused} text="Shop" icon="shop"/>
+                    return <TabBarrIcon focused={focused} text="Shop" icon="shop"/>
                 }
                 
             }}
@@ -33,7 +33,7 @@ const TabNavigator = () => {
             component={CartStack}
             options={{
                 tabBarIcon:({focused}) => {
-                    return <TabBarIcon focused={focused} text="Carrito" icon="shopping-cart"/>
+                    return <TabBarrIcon focused={focused} text="Carrito" icon="shopping-cart"/>
                 }
                 
             }}
@@ -43,7 +43,7 @@ const TabNavigator = () => {
             component={OrdersStack}
             options={{
                 tabBarIcon:({focused}) => {
-                    return <TabBarIcon focused={focused} text="Ordenes" icon="list"/>
+                    return <TabBarrIcon focused={focused} text="Ordenes" icon="list"/>
                 }
             }}
         />
@@ -52,7 +52,7 @@ const TabNavigator = () => {
             component={ProfileStack}
             options={{
                 tabBarIcon:({focused}) => {
-                    return <TabBarIcon focused={focused} text="Perfil" icon="user"/>
+                    return <TabBarrIcon focused={focused} text="Perfil" icon="user"/>
                 }
             }}
         />
